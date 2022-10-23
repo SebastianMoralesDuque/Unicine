@@ -28,7 +28,7 @@ public class AdminTeatroServicio implements AdminTeatroServicioImpl {
     }
 
     @Override
-    public AdministradorTeatro login(String correo, String password) throws Exception {
+    public AdministradorTeatro loginTest(String correo, String password) throws Exception {
         AdministradorTeatro a = administradorTeatroRepo.comprobarAutenticacion(correo, password);
 
         if(a == null){

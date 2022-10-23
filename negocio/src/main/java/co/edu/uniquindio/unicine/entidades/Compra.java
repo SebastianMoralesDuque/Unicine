@@ -50,4 +50,14 @@ public class Compra implements Serializable {
     @OneToOne(mappedBy = "compra")
     private CuponCliente cuponCliente;
 
+    public Compra(LocalDateTime fecha, MedioPago medioPago, float valorTotal, Funcion funcion, Cliente cliente, List<CompraConfiteria> compraConfiteriaList, List<Entrada> entradas, CuponCliente cuponCliente) {
+        this.fecha = fecha;
+        this.medioPago = medioPago;
+        this.valorTotal = valorTotal;
+        this.funcion = funcion;
+        this.cliente = cliente;
+        this.compraConfiteriaList = compraConfiteriaList;
+        this.entradas = entradas;
+        this.cuponCliente = cuponCliente;
+    }
 }

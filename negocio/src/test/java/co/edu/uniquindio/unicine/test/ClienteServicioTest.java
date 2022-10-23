@@ -1,8 +1,8 @@
 package co.edu.uniquindio.unicine.test;
 
-import co.edu.uniquindio.unicine.entidades.Cliente;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
+import co.edu.uniquindio.unicine.repositorios.CuponClienteRepo;
 import co.edu.uniquindio.unicine.repositorios.PeliculaRepo;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import co.edu.uniquindio.unicine.servicios.EmailServicio;
@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @Transactional
@@ -26,6 +27,10 @@ public class ClienteServicioTest {
     private ClienteServicio clienteServicio;
     @Autowired
     private EmailServicio emailServicio;
+
+    private CuponClienteRepo cuponClienteRepo;
+
+    private ClienteRepo clienteRepo;
 
 
     @Test
@@ -106,6 +111,71 @@ public class ClienteServicioTest {
         emailServicio.enviarEmail("prueba de envio", "nidocine@gmail.com", "mensaje nuevo");
 
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerComprasCliente() throws Exception {
+
+
+
+        try {
+            List<Compra> compras= clienteRepo.obtenerComprasCliente("0001");
+            compras.forEach(System.out::println);
+
+
+
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void redimirCupon() throws Exception{
+        CuponCliente cuponGuardado = cuponClienteRepo.buscarCuponClientePorCodigoCupon(1);
+        if(cuponGuardado == null) {
+            throw new Exception("El cupon no existe");
+        }
+        cuponGuardado.setEstado(String.valueOf(true));
+        cuponClienteRepo.save(cuponGuardado);
+
+        cuponGuardado = cuponClienteRepo.buscarCuponClientePorCodigoCupon(1);
+        System.out.println(cuponGuardado);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void hacerCompra() throws Exception{
+       Compra compra = new Compra();
+       Cliente cliente = new Cliente("0005","sebas","carlos@email.com","urlfoto","pass2d1", LocalDate.of(2022,05,05),true,null,null,null);
+       Entrada entrada = new Entrada(7,null,compra.getCuponCliente().getCompra());
+       Cliente nuevo = clienteServicio.login("sebas@email.com","passw1");
+        try {
+        if(nuevo==null)
+        {
+            throw new Exception("cliente no registrado");
+        }
+        if (!compra.getFuncion().getPelicula().isEstado())
+        {
+            throw new Exception("pelicula no disponible");
+        }
+        Optional<CuponCliente> buscado =cuponClienteRepo.findByCodigo(""+cliente.getCuponClienteList());
+       if(buscado.isEmpty())
+       {
+           throw new Exception("el cupon no existe");
+       }
+       compra.setCliente(cliente);
+       compra.setFecha(LocalDate.now().atStartOfDay());
+       Assertions.assertNotNull(compra);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+
+    }
+
+
+
 }
 
 

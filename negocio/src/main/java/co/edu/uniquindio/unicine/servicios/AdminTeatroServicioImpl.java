@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AdminTeatroServicioImpl {
     //------------------------------LOGIN-----------------------------------------------
-    AdministradorTeatro login(String correo, String password) throws Exception;
+    AdministradorTeatro loginTest(String correo, String password) throws Exception;
 
     //-------------------------METODOS CRUD PARA LOS TEATROS--------------------------------
     Teatro crearTeatros(Teatro teatro) throws Exception;

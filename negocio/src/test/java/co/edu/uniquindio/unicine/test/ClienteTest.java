@@ -72,11 +72,7 @@ public class ClienteTest {
             throw new Exception(e);
         }
 
-
-
-
     }
-
 
     @Test
     @Sql("classpath:dataset.sql")
