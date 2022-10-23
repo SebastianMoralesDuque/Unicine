@@ -2,8 +2,10 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
+import co.edu.uniquindio.unicine.entidades.CuponCliente;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
+import co.edu.uniquindio.unicine.repositorios.CuponClienteRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,8 @@ public class ClienteServicioImpl implements ClienteServicio{
 
     private final ClienteRepo clienteRepo;
     private final EmailServicio emailServicio;
+
+    private CuponClienteRepo cuponClienteRepo;
 
     public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio) {
         this.clienteRepo = clienteRepo;
@@ -89,9 +93,17 @@ public class ClienteServicioImpl implements ClienteServicio{
     }
 
     @Override
-    public boolean redimirCupon(Integer codigoCupon) throws Exception {
-        return false;
+    public boolean redimirCupon(Integer codigo) throws Exception {
+        CuponCliente cuponGuardado = cuponClienteRepo.buscarCuponClientePorCodigoCupon(codigo);
+        if(cuponGuardado == null) {
+            throw new Exception("El cupon no existe");
+        }
+        cuponGuardado.setEstado(String.valueOf(true));
+        cuponClienteRepo.save(cuponGuardado);
+        return true;
     }
+
+
 
     @Override
     public boolean cambiarPassword(Integer codigo) {
