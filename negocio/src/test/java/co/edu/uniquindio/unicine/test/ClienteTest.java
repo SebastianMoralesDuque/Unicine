@@ -63,7 +63,7 @@ public class ClienteTest {
 
 
         try {
-            List<Compra> compras= clienteRepo.obtenerComprasCliente("0000");
+            List<Compra> compras= clienteRepo.obtenerComprasCliente("0001");
             compras.forEach(System.out::println);
 
 
