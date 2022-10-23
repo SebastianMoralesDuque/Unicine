@@ -4,6 +4,7 @@ import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
+import co.edu.uniquindio.unicine.repositorios.PeliculaRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class ClienteServicioImpl implements ClienteServicio{
     private final ClienteRepo clienteRepo;
     private final EmailServicio emailServicio;
 
+    private PeliculaRepo peliculaRepo;
+
     public ClienteServicioImpl(ClienteRepo clienteRepo, EmailServicio emailServicio) {
         this.clienteRepo = clienteRepo;
         this.emailServicio = emailServicio;
@@ -25,7 +28,7 @@ public class ClienteServicioImpl implements ClienteServicio{
         Cliente cliente = clienteRepo.comprobarAutenticacion(correo,password);
 
         if(cliente==null){
-            throw new Exception("Los datos de autenticacion son incorrectos0");
+            throw new Exception("Los datos de autenticacion son incorrectos");
         }
         return cliente;
     }
@@ -84,8 +87,14 @@ public class ClienteServicioImpl implements ClienteServicio{
     }
 
     @Override
-    public List<Pelicula> buscarPelicula(String nombre) {
-        return null;
+    public List<Pelicula> buscarPelicula(String nombre) throws Exception {
+        List <Pelicula> guardado= peliculaRepo.buscarPelicula("sacry movie",true);
+
+        if(guardado.isEmpty()){
+            throw new Exception("La pelicula no existe");
+        }
+
+        return guardado;
     }
 
     @Override
@@ -106,6 +115,5 @@ public class ClienteServicioImpl implements ClienteServicio{
             throw new Exception("El cliente no existe");
         }
         return guardado.get();
-
     }
 }

@@ -1,6 +1,9 @@
 package co.edu.uniquindio.unicine.test;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
+import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
+import co.edu.uniquindio.unicine.repositorios.PeliculaRepo;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import co.edu.uniquindio.unicine.servicios.EmailServicio;
 import net.bytebuddy.asm.Advice;
@@ -24,6 +27,20 @@ public class ClienteServicioTest {
     @Autowired
     private EmailServicio emailServicio;
 
+    @Autowired
+    private ClienteRepo clienteRepo;
+
+    private PeliculaRepo peliculaRepo;
+
+
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void loginTest () throws Exception {
+        Cliente nuevo = clienteServicio.login("sebas@email.com","passw1");
+        Assertions.assertNotNull(nuevo);
+    }
+
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarClienteTest (){
@@ -37,6 +54,7 @@ public class ClienteServicioTest {
                 Assertions.assertTrue(false);
             }
     }
+
 
     @Test
     @Sql("classpath:dataset.sql")
