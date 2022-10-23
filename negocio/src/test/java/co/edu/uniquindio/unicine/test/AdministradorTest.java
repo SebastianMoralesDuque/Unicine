@@ -1,8 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 import co.edu.uniquindio.unicine.entidades.Administrador;
-import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.repositorios.AdministradorRepo;
-import co.edu.uniquindio.unicine.repositorios.CompraRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,12 @@ public class AdministradorTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void Registrar(){
+    public void login(){
+
+        Administrador administrador = new Administrador("sara@email.com","sara123");
+        Administrador guardado = administradorRepo.save(administrador);
+
+        Assertions.assertEquals("",guardado.getEmail());
     }
 
     @Test

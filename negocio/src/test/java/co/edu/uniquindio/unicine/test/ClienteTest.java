@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
+import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import org.junit.jupiter.api.Assertions;
@@ -42,6 +43,41 @@ public class ClienteTest {
         Cliente nuevo = clienteRepo.save(guardado);
         Assertions.assertEquals("santiago@gmail.com", nuevo.getEmail());
     }
+
+
+    ///
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerComprasTodo(){
+        List<Object[]> listaCompras = clienteRepo.obtenerCompraTodos();
+        listaCompras.forEach( o ->
+                System.out.println(o [0] + "," + o[1] + "," + o[2])
+        );
+    }
+
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerComprasCliente() throws Exception {
+
+
+
+        try {
+            List<Compra> compras= clienteRepo.obtenerComprasCliente("0000");
+            compras.forEach(System.out::println);
+
+
+
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+
+
+
+
+    }
+
+
     @Test
     @Sql("classpath:dataset.sql")
     public void Obtener(){

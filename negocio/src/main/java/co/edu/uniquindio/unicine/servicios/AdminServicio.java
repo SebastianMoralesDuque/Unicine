@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface AdminServicio {
 
+
+
     //-----------------------------LOGIN----------------------------------------------
-    Administrador login(String correo, String password) throws Exception;
+    Administrador login(String email, String password) throws Exception;
     //------------------------------METODOS CRUD PARA LA CIUDAD---------------------------
     Ciudad crearCiudad(Ciudad ciudad);
 

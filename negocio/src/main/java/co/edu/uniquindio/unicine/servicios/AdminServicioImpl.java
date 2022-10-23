@@ -11,12 +11,15 @@ public class AdminServicioImpl implements AdminServicio {
 
 
     private final CiudadRepo ciudadRepo;
+
+    private final AdministradorRepo administradorRepo;
     private final AdministradorTeatroRepo administradorTeatroRepo;
     private final PeliculaRepo peliculaRepo;
     private final ConfiteriaRepo confiteriaRepo;
     private final CuponRepo cuponRepo;
 
-    public AdminServicioImpl(CiudadRepo ciudadRepo, AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, ConfiteriaRepo confiteriaRepo, CuponRepo cuponRepo) {
+    public AdminServicioImpl(CiudadRepo ciudadRepo,AdministradorRepo administradorRepo, AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, ConfiteriaRepo confiteriaRepo, CuponRepo cuponRepo) {
+        this.administradorRepo = administradorRepo;
         this.ciudadRepo = ciudadRepo;
         this.administradorTeatroRepo = administradorTeatroRepo;
         this.peliculaRepo = peliculaRepo;
@@ -25,9 +28,17 @@ public class AdminServicioImpl implements AdminServicio {
     }
 
     @Override
-    public Administrador login(String correo, String password) throws Exception {
-        return null;
+    public Administrador login( String email, String password) throws Exception {
+
+        Administrador administrador = administradorRepo.comprobarAuntenticacion(email, password);
+
+        if(administrador == null){
+            throw new Exception("Los Datos de Autentificacion son INCORRECTOS");
+        }
+        return administrador;
+
     }
+
 
     @Override
     public Ciudad crearCiudad(Ciudad ciudad) {
