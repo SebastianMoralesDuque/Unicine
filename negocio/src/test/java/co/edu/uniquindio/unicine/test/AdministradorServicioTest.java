@@ -24,9 +24,7 @@ public class AdministradorServicioTest {
     @Sql("classpath:dataset.sql")
     public void login() throws Exception{
 
-
-        Administrador guardado = administradorRepo.comprobarAuntenticacion("sa@email.com","sara123");
-
+        Administrador guardado = administradorRepo.comprobarAuntenticacion("sara@email.com","sara123");
         Assertions.assertNotNull(guardado);
     }
 }
