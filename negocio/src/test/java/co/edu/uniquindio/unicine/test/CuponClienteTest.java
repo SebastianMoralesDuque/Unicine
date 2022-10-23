@@ -63,4 +63,19 @@ public class CuponClienteTest {
         Assertions.assertNull(cuponClienteRepo.findById(1).orElse(null));
     }
 
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void redimirCupon() throws Exception{
+        CuponCliente cuponGuardado = cuponClienteRepo.buscarCuponClientePorCodigoCupon(1);
+        if(cuponGuardado == null) {
+            throw new Exception("El cupon no existe");
+        }
+        cuponGuardado.setEstado(String.valueOf(true));
+        cuponClienteRepo.save(cuponGuardado);
+
+        cuponGuardado = cuponClienteRepo.buscarCuponClientePorCodigoCupon(1);
+        System.out.println(cuponGuardado);
+    }
+
 }
