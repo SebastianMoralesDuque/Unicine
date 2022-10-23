@@ -2,7 +2,6 @@ package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
 import co.edu.uniquindio.unicine.repositorios.PeliculaRepo;
 import org.springframework.stereotype.Service;
@@ -92,10 +91,26 @@ public class ClienteServicioImpl implements ClienteServicio{
         return false;
     }
 
-    @Override
-    public boolean cambiarPassword(Integer codigo) {
-        return false;
+    public void enviarLinkRecuperacion(String correo){
+        emailServicio.enviarEmail("Recuperacion contraseña", "Para recuperar la contraseña ingrese a..........", correo);
     }
+
+    @Override
+    public boolean cambiarPassword(String correo, String pNueva) throws Exception {
+
+        Cliente cliente = clienteRepo.findByEmail(correo).orElse(null);
+        enviarLinkRecuperacion(correo);
+
+        if(cliente==null){
+            throw new Exception("El cliente no se encontro");
+        }
+
+        cliente.setPassword(pNueva);
+        clienteRepo.save(cliente);
+
+        return true;
+    }
+
 
     @Override
     public Cliente obtenerClienteCodigo(String codigoCliente) throws Exception {

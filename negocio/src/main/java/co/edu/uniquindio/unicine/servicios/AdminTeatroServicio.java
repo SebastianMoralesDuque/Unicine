@@ -1,45 +1,129 @@
 package co.edu.uniquindio.unicine.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
+import co.edu.uniquindio.unicine.repositorios.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
+public class AdminTeatroServicio implements AdminTeatroServicioImpl {
 
-public interface AdminTeatroServicio {
-    //------------------------------LOGIN-----------------------------------------------
-    AdministradorTeatro login(String correo, String password) throws Exception;
+    private final TeatroRepo teatroRepo;
+    private final AdministradorTeatroRepo administradorTeatroRepo;
+    private final HorarioRepo horarioRepo;
+    private final FuncionRepo funcionRepo;
+    private final SalaRepo salaRepo;
 
-    //-------------------------METODOS CRUD PARA LOS TEATROS--------------------------------
-    Teatro crearTeatros(Teatro teatro) throws Exception;
+    public AdminTeatroServicio(TeatroRepo teatroRepo, AdministradorTeatroRepo administradorTeatroRepo, HorarioRepo horarioRepo, FuncionRepo funcionRepo, SalaRepo salaRepo) {
+        this.teatroRepo = teatroRepo;
+        this.administradorTeatroRepo = administradorTeatroRepo;
+        this.horarioRepo = horarioRepo;
+        this.funcionRepo = funcionRepo;
+        this.salaRepo = salaRepo;
+    }
 
-    Teatro actualizarTeatros(Teatro teatro) throws Exception;
+    @Override
+    public AdministradorTeatro login(String correo, String password) throws Exception {
+        AdministradorTeatro a = administradorTeatroRepo.comprobarAutenticacion(correo, password);
 
-    void eliminarTeatros(Integer codigo) throws Exception;
+        if(a == null){
+            throw new Exception("Datos incorrectos");
+        }
+        return a;
+    }
 
-    List<Teatro> listarTeatros();
+    @Override
+    public Teatro crearTeatros(Teatro teatro) throws Exception {
+        return null;
+    }
 
-    //------------------------------CRUD DE HORARIOS------------------------------------
-    Horario crearHorarios(Horario horario)throws Exception;
+    @Override
+    public Teatro actualizarTeatros(Teatro teatro) throws Exception {
+        return null;
+    }
 
-    Horario obtenerHorario(Integer codigo)throws Exception;
-    Horario actuaizarHorarios(Horario horario)throws Exception;
+    @Override
+    public void eliminarTeatros(Integer codigo) throws Exception {
 
-    void eliminarHorario(Integer codigo)throws Exception;
+    }
 
-    List<Horario> listarHorarios();
+    @Override
+    public List<Teatro> listarTeatros() {
+        return null;
+    }
 
-    //----------------------------CRUD DE FUNCIONES------------------------------------------
-    Funcion crearFunciones(Funcion funcion)throws Exception;
-    Funcion obtenerFunciones(Integer codigo)throws Exception;
-    Funcion actuaizarFunciones(Funcion funcion)throws Exception;
+    @Override
+    public Horario crearHorarios(Horario horario) throws Exception {
+        return null;
+    }
 
-    void eliminarFuncion(Integer codigo)throws Exception;
+    @Override
+    public Horario obtenerHorario(Integer codigo) throws Exception {
+        return null;
+    }
 
-    List<Funcion> listarFuncion();
+    @Override
+    public Horario actuaizarHorarios(Horario horario) throws Exception {
+        return null;
+    }
 
-    //------------------------------ CRUD DE SALAS ---------------------------------------------
-    Sala crearSalas(Sala sala);
-    Sala obtenerSala(Integer codigo)throws Exception;
-    Sala actualizarSala(Sala sala)throws Exception;
-    void eliminarSala(Integer codigoSala)throws Exception;
-    List<Sala> listarSala();
+    @Override
+    public void eliminarHorario(Integer codigo) throws Exception {
+
+    }
+
+    @Override
+    public List<Horario> listarHorarios() {
+        return null;
+    }
+
+    @Override
+    public Funcion crearFunciones(Funcion funcion) throws Exception {
+        return null;
+    }
+
+    @Override
+    public Funcion obtenerFunciones(Integer codigo) throws Exception {
+        return null;
+    }
+
+    @Override
+    public Funcion actuaizarFunciones(Funcion funcion) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void eliminarFuncion(Integer codigo) throws Exception {
+
+    }
+
+    @Override
+    public List<Funcion> listarFuncion() {
+        return null;
+    }
+
+    @Override
+    public Sala crearSalas(Sala sala) {
+        return null;
+    }
+
+    @Override
+    public Sala obtenerSala(Integer codigo) throws Exception {
+        return null;
+    }
+
+    @Override
+    public Sala actualizarSala(Sala sala) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void eliminarSala(Integer codigoSala) throws Exception {
+
+    }
+
+    @Override
+    public List<Sala> listarSala() {
+        return null;
+    }
 }

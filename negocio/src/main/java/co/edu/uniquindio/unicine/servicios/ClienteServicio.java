@@ -23,6 +23,7 @@ public interface ClienteServicio {
 
     boolean redimirCupon (Integer codigoCupon)throws Exception;
 
-    boolean cambiarPassword(Integer codigo);
+    boolean cambiarPassword(String correo, String passwordNueva) throws Exception;
+
     Cliente obtenerClienteCodigo(String codigo)throws Exception;
 }

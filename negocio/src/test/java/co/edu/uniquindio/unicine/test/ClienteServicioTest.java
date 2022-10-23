@@ -27,12 +27,6 @@ public class ClienteServicioTest {
     @Autowired
     private EmailServicio emailServicio;
 
-    @Autowired
-    private ClienteRepo clienteRepo;
-
-    private PeliculaRepo peliculaRepo;
-
-
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -55,6 +49,17 @@ public class ClienteServicioTest {
             }
     }
 
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void cambiarPassword () throws Exception {
+        try{
+            boolean nuevo = clienteServicio.cambiarPassword("sebas@email.com","nueva");
+            Assertions.assertNotNull(nuevo);
+        } catch (Exception e){
+            Assertions.assertTrue(false);
+        }
+    }
 
     @Test
     @Sql("classpath:dataset.sql")

@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unicine.test;
 
-import co.edu.uniquindio.unicine.entidades.Administrador;
-import co.edu.uniquindio.unicine.repositorios.AdministradorRepo;
+import co.edu.uniquindio.unicine.entidades.AdministradorTeatro;
+import co.edu.uniquindio.unicine.repositorios.AdministradorTeatroRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,8 @@ import java.util.Optional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AdministradorTeatroTest {
     @Autowired
-    private AdministradorRepo administradorRepo;
+    private AdministradorTeatroRepo administradorTeatroRepoRepo;
+
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -28,15 +29,16 @@ public class AdministradorTeatroTest {
     @Sql("classpath:dataset.sql")
     public void Listar(){
 
-        List<Administrador> lista = administradorRepo.findAll();
+        List<AdministradorTeatro> lista = administradorTeatroRepoRepo.findAll();
         System.out.println(lista);
     }
+
 
     @Test
     @Sql("classpath:dataset.sql")
     public void Obtener(){
 
-        Optional<Administrador> buscado = administradorRepo.findById(1);
+        Optional<AdministradorTeatro> buscado = administradorTeatroRepoRepo.findById(1);
         Assertions.assertNotNull(buscado.orElse(null));
     }
 
@@ -44,10 +46,10 @@ public class AdministradorTeatroTest {
     @Sql("classpath:dataset.sql")
     public void Actualizar(){
 
-        Administrador guardado = administradorRepo.findById(1).orElse(null);
+        AdministradorTeatro guardado = administradorTeatroRepoRepo.findById(1).orElse(null);
         guardado.setEmail("Juan@email.com");
 
-        Administrador nuevo = administradorRepo.save(guardado);
+        AdministradorTeatro nuevo = administradorTeatroRepoRepo.save(guardado);
         Assertions.assertEquals("Juan@email.com", nuevo.getEmail());
     }
 
@@ -55,10 +57,10 @@ public class AdministradorTeatroTest {
     @Sql("classpath:dataset.sql")
     public void Eliminar(){
 
-        Administrador buscado = administradorRepo.findById(1).orElse(null);
-        administradorRepo.delete(buscado);
+        AdministradorTeatro buscado = administradorTeatroRepoRepo.findById(1).orElse(null);
+        administradorTeatroRepoRepo.delete(buscado);
 
-        Assertions.assertNull(administradorRepo.findById(1).orElse(null));
+        Assertions.assertNull(administradorTeatroRepoRepo.findById(1).orElse(null));
     }
 
 }
