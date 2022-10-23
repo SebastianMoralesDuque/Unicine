@@ -21,7 +21,6 @@ public interface ClienteServicio {
 
     List<Compra> hacerCompra(Compra compra)throws Exception;
 
-    List<Pelicula> buscarPelicula(String nombre) throws Exception;
     boolean redimirCupon (Integer codigoCupon)throws Exception;
 
     boolean cambiarPassword(Integer codigo);

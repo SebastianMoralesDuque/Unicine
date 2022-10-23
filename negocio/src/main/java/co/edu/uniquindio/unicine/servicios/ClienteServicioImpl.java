@@ -86,16 +86,6 @@ public class ClienteServicioImpl implements ClienteServicio{
         return null;
     }
 
-    @Override
-    public List<Pelicula> buscarPelicula(String nombre) throws Exception {
-        List <Pelicula> guardado= peliculaRepo.buscarPelicula("sacry movie",true);
-
-        if(guardado.isEmpty()){
-            throw new Exception("La pelicula no existe");
-        }
-
-        return guardado;
-    }
 
 
 
