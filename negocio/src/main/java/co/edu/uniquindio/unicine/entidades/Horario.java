@@ -41,4 +41,5 @@ public class Horario implements Serializable {
         this.inicio = inicio;
         this.fin = fin;
     }
+
 }

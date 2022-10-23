@@ -42,4 +42,6 @@ public interface AdminTeatroServicioImpl {
     Sala actualizarSala(Sala sala)throws Exception;
     void eliminarSala(Integer codigoSala)throws Exception;
     List<Sala> listarSala();
+
+    Teatro obtenerTeatro(Integer codigo) throws Exception;
 }

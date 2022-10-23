@@ -4,7 +4,6 @@ import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repositorios.*;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -195,5 +194,14 @@ public class AdminTeatroServicio implements AdminTeatroServicioImpl {
     @Override
     public List<Sala> listarSala() {
         return salaRepo.findAll();
+    }
+
+    @Override
+    public Teatro obtenerTeatro(Integer codigo) throws Exception {
+        Optional<Teatro> teatro = teatroRepo.findById(codigo);
+        if(teatro.isEmpty()){
+            throw new Exception("No existe el teatro");
+        }
+        return teatro.get();
     }
 }
