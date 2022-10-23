@@ -72,6 +72,14 @@ public class PeliculaTest {
 
     @Test
     @Sql("classpath:dataset.sql")
+    public void buscarPeliculaNombre(){
+
+        List<Pelicula> lista = peliculaRepo.buscarPeliculaPorNombre("anabelle");
+        System.out.println(lista);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
     public void listarHorarios(){
 
         List<HorarioSalaDTO> lista = peliculaRepo.listarHorarios(1,1);

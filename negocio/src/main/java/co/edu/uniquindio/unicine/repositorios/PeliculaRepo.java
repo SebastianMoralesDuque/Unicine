@@ -21,6 +21,7 @@ public interface PeliculaRepo extends JpaRepository<Pelicula,Integer> {
     @Query("select p from Pelicula  p join p.generos g where g = :generoPelicula order by p.nombre asc")
     List<Pelicula> listarPeliculas (Genero generoPelicula);
 
-
+    @Query("select pelicula from Pelicula pelicula where pelicula.nombre = :n")
+    List<Pelicula> buscarPeliculaPorNombre(String n);
 
 }
