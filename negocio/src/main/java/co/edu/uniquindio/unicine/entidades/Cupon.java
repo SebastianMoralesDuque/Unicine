@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,4 +32,7 @@ public class Cupon implements Serializable {
 
     @OneToMany(mappedBy = "cupon")
     private List<CuponCliente> cuponClientes;
+
+    public Cupon(int i, String policia, String s, String disponible, LocalDate toLocalDate) {
+    }
 }

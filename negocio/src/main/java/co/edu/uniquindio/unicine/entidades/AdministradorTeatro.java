@@ -30,5 +30,8 @@ public class AdministradorTeatro implements Serializable {
 
     @OneToMany(mappedBy = "administradorTeatro")
     private List<Teatro> teatros;
+
+    public AdministradorTeatro(int codigo, String felipe, String password, String s) {
+    }
 }
 

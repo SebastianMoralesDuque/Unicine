@@ -22,7 +22,7 @@ public class AdministradorTest {
     @Sql("classpath:dataset.sql")
     public void login(){
 
-        Administrador administrador = new Administrador("sara@email.com","sara123");
+        Administrador administrador = new Administrador(1234, "sara@email.com","sara123");
         Administrador guardado = administradorRepo.save(administrador);
 
         Assertions.assertEquals("",guardado.getEmail());

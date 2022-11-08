@@ -41,4 +41,8 @@ public class Pelicula implements Serializable {
 
     @OneToMany(mappedBy = "pelicula")
     private List<Funcion> funciones;
+
+
+    public Pelicula(int i, String purga, String rutaimagen, String rutatrailer, String terror, String leonardo, boolean b) {
+    }
 }

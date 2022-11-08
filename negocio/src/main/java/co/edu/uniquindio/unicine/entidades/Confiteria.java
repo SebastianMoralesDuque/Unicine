@@ -33,4 +33,7 @@ public class Confiteria implements Serializable {
 
     @OneToMany(mappedBy = "confiteria")
     private List<CompraConfiteria> compraConfiteriaList;
+
+    public Confiteria(int i, String ice, double v, String img_producto, Object o) {
+    }
 }

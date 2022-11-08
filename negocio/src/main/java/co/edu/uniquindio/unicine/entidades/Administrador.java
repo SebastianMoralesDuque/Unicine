@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Setter
@@ -19,6 +20,9 @@ public class Administrador implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "administrador")
+    private List<Teatro> teatros;
     @Email
     @Column(unique = true, length = 150)
     private String email;
@@ -26,7 +30,7 @@ public class Administrador implements Serializable {
     @Column(nullable = false, length = 50)
     private String password;
 
-    public Administrador(String email, String password) {
+    public Administrador(int i, String email, String password) {
         this.email = email;
         this.password = password;
     }

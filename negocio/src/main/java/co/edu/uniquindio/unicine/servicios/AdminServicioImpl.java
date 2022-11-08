@@ -41,13 +41,21 @@ public class AdminServicioImpl implements AdminServicio {
 
     }
 
+    /**
+     *
+     * @param ciudad
+     * @return
 
     @Override
     public Ciudad crearCiudad(Ciudad ciudad) {
 
         return ciudadRepo.save(ciudad);
     }
-
+*/
+    @Override
+    public Ciudad crearCiudad(Ciudad ciudad){
+        return ciudadRepo.save(ciudad);
+    }
     @Override
     public Ciudad obtenerCiudad(Integer codigo) throws Exception {
 
@@ -59,6 +67,8 @@ public class AdminServicioImpl implements AdminServicio {
         }
         return null;
     }
+
+
 
     @Override
     public Ciudad actualizarCiudad(Ciudad ciudad) throws Exception {
@@ -81,10 +91,9 @@ public class AdminServicioImpl implements AdminServicio {
     }
 
     @Override
-    public List<Ciudad> listarCiudad() {
-        return null;
+    public List<Ciudad> listarCiudad()  {
+        return ciudadRepo.findAll();
     }
-
     @Override
     public AdministradorTeatro crearAdministradorTeatros(AdministradorTeatro administradorTeatro) throws Exception {
         boolean administradorTeatrosExiste = AdministradorRepetido(administradorTeatro.getCodigo());
@@ -99,10 +108,11 @@ public class AdminServicioImpl implements AdminServicio {
 
     }
 
-
     private boolean AdministradorRepetidoCorreo(String email){
         return administradorTeatroRepo.findByEmail(email).orElse(null)!=null;
     }
+
+
 
 
     private boolean AdministradorRepetido(Integer codigoAdministrador) {
@@ -138,14 +148,14 @@ public class AdminServicioImpl implements AdminServicio {
 
     @Override
     public List<AdministradorTeatro> listarAdministradorTeatros() {
-        return null;
+        return administradorTeatroRepo.findAll();
     }
+
 
     @Override
-    public Pelicula crearPeliculas(Pelicula pelicula) {
-        return null;
+    public Pelicula crearPeliculas(Pelicula pelicula){
+        return peliculaRepo.save(pelicula);
     }
-
     @Override
     public Pelicula obtenerPelicula(Integer codigo) throws Exception {
         Optional<Pelicula> pelicula = peliculaRepo.findById(codigo);
@@ -176,12 +186,11 @@ public class AdminServicioImpl implements AdminServicio {
 
     @Override
     public List<Pelicula> listarPeliculas() {
-        return null;
+        return peliculaRepo.findAll();
     }
-
     @Override
-    public Confiteria crearConfiteria(Confiteria confiteria) {
-        return null;
+    public Confiteria crearConfiteria(Confiteria confiteria){
+        return confiteriaRepo.save(confiteria);
     }
 
     @Override
@@ -215,14 +224,12 @@ public class AdminServicioImpl implements AdminServicio {
 
     @Override
     public List<Confiteria> listarConfiteria() {
-        return null;
+        return confiteriaRepo.findAll();
     }
-
     @Override
-    public Cupon crearCupones(Cupon cupon) {
-        return null;
+    public Cupon crearCupones(Cupon cupon){
+        return cuponRepo.save(cupon);
     }
-
     @Override
     public Cupon obtenerCupones(Integer codigo) throws Exception {
         Optional<Cupon> cupon = cuponRepo.findById(codigo);

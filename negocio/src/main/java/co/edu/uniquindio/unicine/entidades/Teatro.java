@@ -38,6 +38,10 @@ public class Teatro implements Serializable {
     @OneToMany(mappedBy = "teatro")
     private List<Sala> salas;
 
+    @ManyToOne
+    @JoinColumn(name = "administrador_codigo")
+    private Administrador administrador;
+
     public Teatro(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
